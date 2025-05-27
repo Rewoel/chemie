@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemie Übung: Salzformeln Aufstellen (Windows XP Retro)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the "Press Start 2P" font and Windows XP retro theme */
+        body {
+            font-family: 'Press Start 2P', cursive;
+            /* Windows XP default background gradient */
+            background: linear-gradient(to bottom, #3A6EA5, #4A84C3, #3A6EA5);
+            color: #000000; /* Black text for overall readability */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 4px; /* Small padding around the "window" */
+        }
+
+        /* Main container mimicking a Windows XP window */
+        .xp-window {
+            background-color: #ECE9D8; /* Light grey for window background */
+            border: 1px solid #A3A3A3; /* Standard grey border */
+            border-radius: 4px; /* Slight rounding for XP look */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* Subtle shadow */
+            width: 100%;
+            max-width: 800px; /* Max width for the window */
+            overflow: hidden; /* Ensures content stays within bounds */
+        }
+
+        /* Title bar (simplified) */
+        .xp-title-bar {
+            background: linear-gradient(to right, #0A246A, #1E468A); /* XP blue gradient */
+            color: #FFFFFF; /* White text for title bar */
+            padding: 8px 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-bottom: 1px solid #000000; /* Dark line below title bar */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .xp-title-bar-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        .xp-title-button {
+            background-color: #C0C0C0;
+            border: 1px solid #808080;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #000000;
+            cursor: pointer;
+            box-shadow: 1px 1px 0px rgba(255,255,255,0.5) inset, -1px -1px 0px rgba(0,0,0,0.2) inset;
+        }
+        .xp-title-button:active {
+            box-shadow: -1px -1px 0px rgba(255,255,255,0.5) inset, 1px 1px 0px rgba(0,0,0,0.2) inset;
+        }
+
+        /* Content area */
+        .xp-content-area {
+            padding: 20px;
+            background-color: #ECE9D8; /* Same as window background */
+        }
+
+        /* Headings */
+        h1, h2 {
+            color: #000000; /* Black text for headings */
+            text-shadow: none; /* Remove pixelated shadow for cleaner XP look */
+        }
+        h1 {
+            font-size: 2.2rem; /* Slightly smaller for better fit */
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* Input fields */
+        input[type="text"] {
+            background-color: #FFFFFF; /* White background for input */
+            color: #000000; /* Black text for input */
+            border: 1px solid #7F9DB9; /* Standard XP input border */
+            border-radius: 2px; /* Slight rounding */
+            padding: 8px 10px;
+            font-size: 1rem; /* Adjust font size */
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2); /* Inset shadow */
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #316AC5; /* XP blue focus border */
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2), 0 0 0 1px #316AC5; /* Combined shadow and outline */
+        }
+
+        /* Buttons */
+        .xp-button {
+            background-color: #F0F0F0;
+            border: 1px solid #808080;
+            border-bottom-color: #555555; /* Darker bottom border for depth */
+            border-right-color: #555555; /* Darker right border for depth */
+            border-radius: 2px;
+            box-shadow: 1px 1px 0px rgba(255,255,255,0.5) inset, -1px -1px 0px rgba(0,0,0,0.2) inset;
+            color: #000000;
+            padding: 8px 16px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.05s ease-out;
+        }
+        .xp-button:hover {
+            background-color: #E0E0E0;
+        }
+        .xp-button:active {
+            background-color: #D0D0D0;
+            transform: translate(1px, 1px);
+            box-shadow: -1px -1px 0px rgba(255,255,255,0.5) inset, 1px 1px 0px rgba(0,0,0,0.2) inset;
+        }
+
+        /* Feedback messages */
+        .feedback-correct {
+            color: #008000; /* Darker green for correct */
+            text-shadow: none;
+        }
+        .feedback-wrong {
+            color: #CC0000; /* Darker red for wrong */
+            text-shadow: none;
+        }
+
+        /* Specific styling for the question display box */
+        .question-display-box {
+            background-color: #FFFFFF; /* White background as requested */
+            border: 1px solid #A3A3A3; /* Simple grey border */
+            box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1); /* Subtle inset shadow */
+            color: #000000; /* Black text for contrast */
+            padding: 20px;
+            border-radius: 2px;
+        }
+        .question-display-box p {
+            color: #000000; /* Ensure all text inside is black */
+        }
+
+        /* General text color adjustments */
+        .text-gray-700 {
+            color: #000000; /* Ensure descriptive text is black */
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="xp-window">
+        <div class="xp-title-bar">
+            <span>Chemie Übung</span>
+            <div class="xp-title-bar-buttons">
+                <div class="xp-title-button">_</div>
+                <div class="xp-title-button">□</div>
+                <div class="xp-title-button">x</div>
+            </div>
+        </div>
+        <div class="xp-content-area">
+            <h1 class="text-center mb-8 tracking-tight">
+                Salzformeln Aufstellen
+            </h1>
+
+            <div class="space-y-4">
+                <p class="text-lg text-gray-700">
+                    Stelle die Formel für das folgende Salz auf. Achte auf die korrekte Schreibweise und die Subskripte.
+                </p>
+                <div class="flex flex-col items-center justify-center question-display-box">
+                    <p class="text-2xl font-semibold mb-4">Name:</p>
+                    <p id="formula-name" class="text-4xl font-bold">?</p>
+                </div>
+                <input type="text" id="formula-input" placeholder="Gib die Formel des Salzes ein (z.B. NaCl)"
+                       class="w-full">
+                <div id="formula-feedback" class="text-center text-lg font-medium mt-2"></div>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+                    <button id="check-formula"
+                            class="flex-1 xp-button">
+                        Antwort Prüfen
+                    </button>
+                    <button id="next-formula"
+                            class="flex-1 xp-button">
+                        Nächste Frage
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Array of binary salts for formula exercises (Name -> Formula)
+        // These salts consist of only two types of atoms.
+        const formulaSalts = [
+            { name: "Natriumchlorid", formula: "NaCl" },
+            { name: "Kaliumchlorid", formula: "KCl" },
+            { name: "Aluminiumchlorid", formula: "AlCl3" },
+            { name: "Eisen(II)-chlorid", formula: "FeCl2" },
+            { name: "Eisen(III)-chlorid", formula: "FeCl3" },
+            { name: "Zinkchlorid", formula: "ZnCl2" },
+            { name: "Silberchlorid", formula: "AgCl" },
+            { name: "Magnesiumbromid", formula: "MgBr2" },
+            { name: "Calciumfluorid", formula: "CaF2" },
+            { name: "Lithiumiodid", formula: "LiI" },
+            { name: "Natriumoxid", formula: "Na2O" },
+            { name: "Kaliumsulfid", formula: "K2S" },
+            { name: "Bariumchlorid", formula: "BaCl2" },
+            { name: "Kupfer(I)-chlorid", formula: "CuCl" },
+            { name: "Kupfer(II)-chlorid", formula: "CuCl2" },
+            { name: "Blei(II)-sulfid", formula: "PbS" },
+            { name: "Zinn(II)-fluorid", formula: "SnF2" }
+        ];
+
+        // --- DOM Elements ---
+        const formulaNameDisplay = document.getElementById('formula-name');
+        const formulaInput = document.getElementById('formula-input');
+        const formulaFeedback = document.getElementById('formula-feedback');
+        const checkFormulaBtn = document.getElementById('check-formula');
+        const nextFormulaBtn = document.getElementById('next-formula');
+
+        let currentFormulaSalt = null;
+
+        /**
+         * Generates a random formula question and displays the name.
+         */
+        function generateFormulaQuestion() {
+            resetFeedback(formulaInput, formulaFeedback);
+            const randomIndex = Math.floor(Math.random() * formulaSalts.length);
+            currentFormulaSalt = formulaSalts[randomIndex];
+            formulaNameDisplay.textContent = currentFormulaSalt.name;
+            formulaInput.value = ''; // Clear input field
+            formulaInput.focus(); // Focus input for quick typing
+        }
+
+        /**
+         * Checks the user's answer for the formula question.
+         */
+        function checkFormulaAnswer() {
+            const userAnswer = formulaInput.value.trim();
+            // Normalize formula answers for comparison (e.g., remove spaces, standardize numbers as subscripts)
+            // This is a simplified normalization. For full robustness, a chemical formula parser would be needed.
+            const normalizedUserAnswer = userAnswer.replace(/\s/g, '') // Remove all spaces
+                                                   .replace(/([A-Z][a-z]?)(\d+)/g, '$1$2') // Ensure no space between element and number
+                                                   .replace(/(\(|\))(\d+)/g, '$1$2'); // Ensure no space between bracket and number
+
+            const normalizedCorrectAnswer = currentFormulaSalt.formula.replace(/\s/g, '')
+                                                                 .replace(/([A-Z][a-z]?)(\d+)/g, '$1$2')
+                                                                 .replace(/(\(|\))(\d+)/g, '$1$2');
+
+            if (normalizedUserAnswer === normalizedCorrectAnswer) {
+                formulaFeedback.textContent = 'Richtig! Super!';
+                formulaFeedback.className = 'text-center text-lg font-medium mt-2 feedback-correct'; // Apply retro feedback class
+            } else {
+                formulaFeedback.textContent = `Falsch. Die richtige Antwort ist: ${currentFormulaSalt.formula}`;
+                formulaFeedback.className = 'text-center text-lg font-medium mt-2 feedback-wrong'; // Apply retro feedback class
+            }
+        }
+
+        /**
+         * Resets the feedback message and input field styling.
+         * @param {HTMLInputElement} inputElement - The input field to reset.
+         * @param {HTMLElement} feedbackElement - The feedback display element to reset.
+         */
+        function resetFeedback(inputElement, feedbackElement) {
+            feedbackElement.textContent = '';
+            feedbackElement.className = 'text-center text-lg font-medium mt-2'; // Reset class
+            inputElement.classList.remove('border-green-500', 'border-red-500'); // Remove previous border colors
+            inputElement.classList.add('border-gray-300'); // Add default border color
+        }
+
+        // --- Event Listeners ---
+        checkFormulaBtn.addEventListener('click', checkFormulaAnswer);
+        nextFormulaBtn.addEventListener('click', generateFormulaQuestion);
+        formulaInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                checkFormulaAnswer();
+            }
+        });
+
+        // Initialize question on page load
+        window.onload = function() {
+            generateFormulaQuestion();
+        };
+    </script>
+</body>
+</html>
